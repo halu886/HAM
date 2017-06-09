@@ -61,12 +61,14 @@
 			<div id="personal" class="col-md-2 column"
 				style="background-color: #;">
 				<div id="img1" style="height: 100px; width: 100px; float: left;">
-					<shiro:hasRole name="employee"><img src="${ctx}/plugin/img/img1.jpg"
-						style="border: 1px solid #C1E2B3; border-radius: 50%; height: 80px; width: 80px; margin: 10px;" />
-						</shiro:hasRole>
-					<shiro:hasRole name="admin"><img src="${ctx}/plugin/img/2.jpg"
-						style="border: 1px solid #C1E2B3; border-radius: 50%; height: 80px; width: 80px; margin: 10px;" />
-						</shiro:hasRole>
+					<shiro:hasRole name="employee">
+						<img src="${ctx}/plugin/img/img1.jpg"
+							style="border: 1px solid #C1E2B3; border-radius: 50%; height: 80px; width: 80px; margin: 10px;" />
+					</shiro:hasRole>
+					<shiro:hasRole name="admin">
+						<img src="${ctx}/plugin/img/2.jpg"
+							style="border: 1px solid #C1E2B3; border-radius: 50%; height: 80px; width: 80px; margin: 10px;" />
+					</shiro:hasRole>
 				</div>
 
 				<div id="information"
@@ -126,7 +128,7 @@
 						</button>
 						<strong>fail!</strong>添加失败！
 					</div>
-					<div class="alert alert-success alert-dismissible"
+					<div class="alert alert-success alert-dismissible "
 						data-dismiss="alert" role="alert" id="successAlert"
 						style="display: none">
 						<button type="button" class="close" data-dismiss="alert"
@@ -135,48 +137,46 @@
 						</button>
 						<strong>success!</strong>添加成功！
 					</div>
-					<div class="form-group">
-						<label for="address">房屋详细信息</label> <input type="text"
-							class="form-control" id="address" name="address"
-							placeholder="address">
-					</div>
-					<div class="checkbox">
-						<label> <input type="checkbox" id="rentStatue"
+					<div class="form-group"></div>
+					<div class="checkbox col-sm-2">
+						<label> <input type="radio" id="rentStatue"
 							name="rentStatue"> 出租意向
 						</label>
 					</div>
-					<div class="form-group">
+					<div class="form-group col-sm-10">
 						<label for="unitRentPrice">单元出租价格</label> <input type="text"
 							class="form-control" id="unitRentPrice" name="unitRentPrice"
 							placeholder="unitRentPrice">
 					</div>
-					<div class="checkbox">
-						<label> <input type="checkbox" id="rent_statue"
-							name="rentStatue">出售意向
+					<div class="checkbox col-sm-2">
+						<label> <input type="radio" id="rent_statue"
+							name="rentStatue"> 出售意向
 						</label>
 					</div>
 
-					<div class="form-group">
+					<div class="form-group col-sm-10">
 						<label for="unitRentPrice">单元出售价格</label> <input type="text"
 							class="form-control" id="unitsalePrice" name="unitsalePrice"
 							placeholder="unitsalePrice">
 					</div>
-					<div class="form-group">
+					<div class="form-group col-sm-6">
 						<label for="clientName">顾客姓名</label> <input type="text"
 							class="form-control" id="clientName" name="clientName"
 							placeholder="clientName">
 					</div>
-					<div class="form-group">
+					<div class="form-group col-sm-6">
 						<label for="clientPhone">顾客电话</label> <input type="text"
 							class="form-control" id="clientPhone" name="clientPhone"
 							placeholder="clientPhone">
+
 					</div>
-					<div class="form-group">
-						<label for="houseAddress">房屋详细信息</label> <input type="text"
-							class="form-control" id="houseAddress" name="houseAddress"
-							placeholder="houseAddress">
+					<div class="form-group col-sm-12" style="margin-top: 15px">
+						<label for="houseAddress">房屋详细信息</label>
+						<textarea class="form-control" rows="5" id="houseAddress"
+							name="houseAddress" placeholder="随便写点东西咯..."></textarea>
 					</div>
-					<button id="SubmitButton" class="btn btn-default">Submit</button>
+					<button id="SubmitButton" class="btn btn-default btn-primary"
+						style="margin-left: 12px">Submit</button>
 				</form>
 			</div>
 		</div>
@@ -321,14 +321,13 @@
 		}]; 
  
 		 var managerUl = 
-				[anonyUl,
-					{
-						text:'部门管理',
-						href:'#parent6',
-						tags:['0']
-					},{
-						text:'权限管理',
-					}];
+		[anonyUl,
+			 {text:'员工管理',
+			},
+			{text:'部门管理',
+			},
+			{text:'权限管理',
+			}];
 		
 		var adminUl = [{
 			text:'用户管理'
@@ -345,61 +344,80 @@
 		
 		function showPanel(tableTypeURL) {							
 			var panelHeading = $(".panel-heading");
-			var panelHeadingVal = panelHeading.html("show  "+tableType);			
+			/* var panelHeadingVal = panelHeading.html("show  "+tableType);	 */		
 			loadTable(tableTypeURL);
 			$panelDisplay.css("display", "inline");
 		}
 
 		function loadTable(tableTypeURL) {
 			
-			var ajaxUrl = "/HAM" + tableTypeURL;
+			var ajaxUrl = "/HAM/" + tableTypeURL;	
 			
-			var tableType = function(tableTypeURL){
-				switch(tableTypeURL){
-				case "houses/getHousesByEmployeeId.htmls":
-					return "houses";
-					break;
-				case "workrecords/getWorkrecordsByEmployeeId.htmls":
-					return "workrecords";
-					break;
-				case "tasks/getTasksByEmployeeId.htmls":
-					return "taskmanagements";
-					break;
-				case "keycontrolls/getKeyControllersByEmployeeId.htmls":
-					return "keycontrolls";
-					break;
-				}
+/* 			ArrayList a1 = new ArrayList();
+			a1.add("1");
+		    a1.add("1");
+		    a1.add("王川川");
+		    a1.add("1");
+		    a1.add("18845637894");
+		    a1.add("1");
+		    a1.add("1"); */
+		    
+			if(ajaxUrl == "/HAM/special"){
+				var $table = $('#table');
+				var tableType = "employees";
+				var columns = initTable(tableType, $table);
+				$table.bootstrapTable('destroy').bootstrapTable({
+					columns: columns,
+					data: ""
+				});
 			}
-			 
-			$.ajax({
-				cache: true,
-				type: "GET",
-				data: ${loginEmployee.employeeId},
-				datetype: "json",
-				url: ajaxUrl,
-				success: function(data) {
- 					var dataJson = eval('(' + data + ')'); 
-					if(dataJson.isDone == true) {
-						var $table = $('#table');
-						var columns = initTable(tableType, $table);
-						$table.bootstrapTable('destroy').bootstrapTable({
-							columns: columns,
-							data: dataJson.list
-						});
+			else{
+				var tableType =  getTableType(tableTypeURL);
+				function getTableType(tableTypeURL){
+					switch(tableTypeURL){
+					case "house/getHouseByEmployeeID.htmls":
+						return "houses";
+						break;
+					case "workrecord/getWorkrecordByEmployeeId.htmls":
+						return "workrecords";
+						break;
+					case "task/getTaskByEmployeeId.htmls":
+						return "taskmanagements";
+						break;
+					case "keycontroll/getKeyControllerByEmployeeId.htmls":
+						return "keycontrolls";
+						break;
 					}
-					if(dataJson.isLogin == false) {
-						alert(data.errorMsg);
-					}
-
 				}
-			});
-
+				 
+				$.ajax({
+					cache: true,
+					type: "GET",
+					datetype: "json",
+					url: ajaxUrl,
+					success: function(data) {
+							var dataJson = eval('(' + data + ')'); 
+						if(dataJson.isDone == true) {
+							var $table = $('#table');
+							var columns = initTable(tableType, $table);
+							$table.bootstrapTable('destroy').bootstrapTable({
+								columns: columns,
+								data: dataJson.list
+							});
+						}
+						if(dataJson.isLogin == false) {
+							alert(data.errorMsg);
+						}
+		
+					}
+				});
+			}
 		}
 
 		function setTableTypetoURL(data){
 			switch(data.text){
 				case "房源信息":
-					return "house/getHouseByEmployeeId.htmls";
+					return "house/getHouseByEmployeeID.htmls";
 					break;
 				case "工作日志":
 					return "workrecord/getWorkrecordByEmployeeId.htmls";
@@ -410,15 +428,12 @@
 				case "钥匙信息":
 					return "key/getKeyByEmployeeId.htmls";
 					break;
+
+				case "员工管理":
+					return "special";
+					break;
 			}
-		}
-
-		
-
-		$('#employeeTree').on('nodeSelected',function(event, data) {
-			var tableTypeURL = setTableTypetoURL(data);
-		    showPanel(tableTypeURL);
-		});
+		}		
 
 		function initTable(tableType, $table) {
 			var filedlist = new Object();
@@ -512,10 +527,49 @@
 				field: 'actualReturnDate',
 				title: '实际归还时间',
 			}];
+
+			var employeeColumns = [{
+                field: 'state',
+                checkbox: true,
+                align: 'center',
+            },{
+				field: 'employeeId',
+				title: '员工编号',
+				sortable: true,
+				align: 'center',
+			},{
+				field: 'employeeDepart',
+				title: '员工部门',
+				align: 'center',
+			},{
+				field: 'employeeName',
+				title: '员工姓名',
+				align: 'center',
+			}, {
+				field: 'employeeSex',
+				title: '员工性别',
+				align: 'center',
+			}, {
+				field: 'employeePhone',
+				title: '员工电话',
+				align: 'center',
+			}, {
+				field: 'employeePosition',
+				title: '员工职务',
+				align: 'center',
+			},{
+                field: 'operate',
+                title: '操作',
+                align: 'center',
+                events: operateEvents,
+                formatter: operateFormatter
+            }];
+            
 			filedlist['workrecords'] = workRecordColumns;
 			filedlist['houses'] = houseColumns;
 			filedlist['taskmanagements'] = task;
 			filedlist['keycontrolls'] = keycontroller;
+			filedlist['employees'] = employeeColumns;
 
 			 $remove.click(function () {
 	            var ids = getIdSelections();
@@ -570,9 +624,19 @@
 				}
 	        }
 	    };
+
+	    function ajaxrequest(url,data,sucessFuntion){
+	    	$.ajax({
+				type: "GET",
+				data: data,
+				datetype: "json",
+				url: url,
+				success: sucessFuntion
+			});
+		}
 	    
 	    function testAlert(){
-	    	alert("test");
+	    	alert("签到成功");
 	    }
 		
 		$(function() {	
@@ -593,6 +657,16 @@
 			});
 			$('#departManagerTree').treeview({
 				data:managerUl
+			});
+
+			$('#employeeTree').on('nodeSelected',function(event, data) {
+				var tableTypeURL = setTableTypetoURL(data);
+			    showPanel(tableTypeURL);
+			});
+
+			$('#adminTree').on('nodeSelected',function(event, data) {
+				var tableTypeURL = setTableTypetoURL(data);
+			    showPanel(tableTypeURL);
 			});
 
 			

@@ -38,7 +38,6 @@ public class HouseService extends BaseService<House, Integer>{
 		housekey.setHousekeyStatue(false);
 		Integer houseKeyId = housekeyDao.save(housekey);
 		Housekey housekey2 = housekeyDao.find(2);
-		System.out.println(housekey);
 		entity.setHousekey(housekeyDao.find(houseKeyId));
 		super.save(entity);
 	}

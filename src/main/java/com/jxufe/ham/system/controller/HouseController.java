@@ -83,19 +83,10 @@ public class HouseController {
 		try {
 			Integer employeeId = (Integer)SecurityUtils.getSubject().getPrincipal();
 			
-			List<PropertyFilter> list = new ArrayList<PropertyFilter>();
-//			Employee employee = new Employee();
-//			employee.setEmployeeId(employeeId);
-//			list.add(new PropertyFilter("EQL_Employee.employeeId",employeeId.toString()));
-			
-//			houseList = houseService.search("from House house where house.employee.employeeId="+employeeId);
-			houseList  = houseService.search("SELECT * FROM house WHERE house.employeeID = ?", employeeId);
-			System.out.println(houseList);
-			
+			List<PropertyFilter> list = new ArrayList<PropertyFilter>();	
+			houseList = houseService.search("from House house where house.employee.employeeId="+employeeId);
 		} catch (Exception e) {
 			logger.error(e.getMessage());
-			System.out.println(houseList);
-			System.out.println(e.getMessage());
 			hashMap.put(ISDONE, false);
 			hashMap.put(ERROR_MSG, "查询失败");
 			return hashMap;

@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.jxufe.ham.common.entity.BaseBean;
 
 /**
@@ -83,7 +84,7 @@ public class Task extends BaseBean {
 		this.publishDate = publishDate;
 	}
 
-	public boolean isTaskStatue() {
+	public boolean getTaskStatue() {
 		return this.taskStatue;
 	}
 
@@ -118,10 +119,10 @@ public class Task extends BaseBean {
 
 	@Override
 	public String toString() {
-		return "Task [taskId= " + taskId +
-				",planDo= " + planDo + ", publishDate= " + publishDate + ", taskStatue= " + taskStatue + 
-				",taskLevel= "+ taskLevel + ",taskInfo="+taskInfo+
-				",taskmanagements = "+taskmanagements.toString() +"]";
+		return "Task [taskId=" + taskId + ", planDo=" + planDo + ", publishDate=" + publishDate + ", taskStatue="
+				+ taskStatue + ", taskLevel=" + taskLevel + ", taskInfo=" + taskInfo + "]";
 	}
 
+
+	
 }

@@ -30,7 +30,7 @@ public class Employee extends BaseBean {
 	//序列化ID
 	private static final long serialVersionUID = 7031407605308824083L;
 
-	private Integer employeeId;//员工编号
+	private int employeeId;//员工编号
 	
 	private Depart departID;//所属部门
 	
@@ -78,7 +78,7 @@ public class Employee extends BaseBean {
 		super();
 	}
 
-	public Employee(Integer employeeId, Depart departID, String employeeName, Boolean employeeSex, String employeePhone,
+	public Employee(int employeeId, Depart departID, String employeeName, Boolean employeeSex, String employeePhone,
 			String passWord, int employeePosition, Set<Leaveword> leavewords, Set<Performance> performances,
 			Set<House> houses, Set<Followup> followups, Set<Workrecord> workrecords, Set<Log> logs,
 			Set<Keymanagement> keymanagements, Set<Depart> departs, Set<Taskmanagement> taskmanagements,
@@ -110,11 +110,13 @@ public class Employee extends BaseBean {
 				+ ", employeePosition=" + employeePosition + "]";
 	}
 
+	
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((employeeId == null) ? 0 : employeeId.hashCode());
+		result = prime * result + employeeId;
 		return result;
 	}
 
@@ -127,19 +129,16 @@ public class Employee extends BaseBean {
 		if (getClass() != obj.getClass())
 			return false;
 		Employee other = (Employee) obj;
-		if (employeeId == null) {
-			if (other.employeeId != null)
-				return false;
-		} else if (!employeeId.equals(other.employeeId))
+		if (employeeId != other.employeeId)
 			return false;
 		return true;
 	}
 
-	public Integer getEmployeeId() {
+	public int getEmployeeId() {
 		return employeeId;
 	}
 
-	public void setEmployeeId(Integer employeeId) {
+	public void setEmployeeId(int employeeId) {
 		this.employeeId = employeeId;
 	}
 

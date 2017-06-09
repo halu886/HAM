@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jxufe.ham.system.entity.Task;
 import com.jxufe.ham.system.service.TaskService;
@@ -31,17 +32,23 @@ public class TaskController {
 	@Autowired
 	private TaskService taskService;
 	
-	@RequestMapping(value="/getTaskByEmployeeId",method=RequestMethod.POST)
-	public HashMap<String, Object> getTaskByEmployeeId(){
+	
+	@RequestMapping("/getTaskByEmployeeId")
+	public @ResponseBody HashMap<String, Object> getTaskByEmployeeId(){
+//		System.out.println("test");
 		Integer employeeId = (Integer)SecurityUtils.getSubject().getPrincipal();
 		HashMap<String,Object> hashMap = new HashMap<String, Object>();
-		List<Task> tasks;
+		List<Task> tasks = null;
 		try {
 			tasks = taskService.getTaskByEmployeeId(employeeId);
 		} catch (Exception e) {
-			hashMap.put(IS_DO,true);
+			logger.error("error"+e.getMessage());
+			hashMap.put(IS_DO,false);
 			hashMap.put(ERROR_MSG, "查询失败");
+			return hashMap;
 		}
+		System.out.println(tasks);
+		hashMap.put("list", tasks);
 		hashMap.put(IS_DO, true);
 		hashMap.put(MSG, "查询成功");
 		return hashMap;

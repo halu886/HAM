@@ -39,6 +39,7 @@ public class WorkrecordController {
 		HashMap<String, Object> hashMap = new HashMap<String, Object>();
 		boolean result = false;
 		try {
+			
 			result = workrecordService.signIn(employeeId);
 		} catch (Exception e) {
 			log.error(e);
